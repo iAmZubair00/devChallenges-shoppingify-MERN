@@ -10,6 +10,7 @@ import {
 import useStyles from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleShoppingList } from "../../features/rightBarToggleSlice";
+import { deleteItem } from "../../features/categoryItemSlice";
 const ItemDetail = () => {
   //console.log(post);
   const item = useSelector((store) => store.itemDetail);
@@ -53,7 +54,15 @@ const ItemDetail = () => {
         </div>
       </CardContent>
       <CardActions className={classes.cardActions}>
-        <Button size="small">delete</Button>
+        <Button
+          size="small"
+          onClick={() => {
+            dispatch(deleteItem(item._id));
+            dispatch(toggleShoppingList());
+          }}
+        >
+          delete
+        </Button>
         <Button
           size="small"
           onClick={() => dispatch(toggleShoppingList())}

@@ -22,7 +22,7 @@ const Items = () => {
   const items = useSelector(selectFilteredAllItems);
   const categories = useSelector((store) => store.categories);
   const allCategories = mergeItemsWithCategories(items, categories);
-  console.log(allCategories);
+  //console.log(allCategories);
   const dispatch = useDispatch();
   const styles = useStyles();
   // useEffect(() => {

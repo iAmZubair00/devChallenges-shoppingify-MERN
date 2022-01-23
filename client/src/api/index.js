@@ -17,6 +17,11 @@ export const addItem = async (item) => {
   return data;
 };
 
+export const deleteItem = async (id) => {
+  const data = await axios.delete(`${baseURL}/items/delete/${id}`);
+  return data;
+};
+
 export const getItems = async () => {
   const data = await axios.get(`${baseURL}/items/get`);
   return data;

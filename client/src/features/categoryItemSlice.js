@@ -39,6 +39,18 @@ export const addItem = (item) => async (dispatch) => {
   }
 };
 
+export const deleteItem = (id) => async (dispatch) => {
+  try {
+    const { data } = await api.deleteItem(id);
+    dispatch({
+      type: "item/delete",
+      payload: data,
+    });
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
 export const getItems = () => async (dispatch) => {
   try {
     const { data } = await api.getItems();
@@ -61,6 +73,8 @@ export const itemReducer = (state = initialState, action) => {
       return [...state, action.payload];
     case "item/get":
       return action.payload;
+    case "item/delete":
+      return state.filter((item) => item._id !== action.payload._id);
     default:
       return state;
   }

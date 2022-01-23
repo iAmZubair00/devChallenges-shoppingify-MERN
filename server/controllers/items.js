@@ -45,6 +45,17 @@ export const item_add = async (req, res) => {
   }
 };
 
+export const item_delete = async (req, res) => {
+  let id = req.params.id;
+
+  try {
+    const deletedItem = await itemModel.findByIdAndRemove(id);
+    res.status(200).json(deletedItem);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
 // alternate logic - used previously
 
 // export const category_find = async (req, res) => {

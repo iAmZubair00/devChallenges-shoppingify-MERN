@@ -38,3 +38,28 @@ export const getItems = async () => {
 //   const data = await axios.put(`${baseURL}/items/category/edit`, item);
 //   return data;
 // };
+
+export const addList = async (list) => {
+  const data = await axios.post(`${baseURL}/lists/add`, list);
+  return data;
+};
+
+export const getLists = async () => {
+  const data = await axios.get(`${baseURL}/lists/get`);
+  return data;
+};
+
+export const addListItem = async (item) => {
+  const data = await axios.post(`${baseURL}/listItems/add`, item);
+  return data;
+};
+
+// export const deleteItem = async (id) => {
+//   const data = await axios.delete(`${baseURL}/items/delete/${id}`);
+//   return data;
+// };
+
+export const getListItems = async () => {
+  const data = await axios.get(`${baseURL}/listItems/get`);
+  return data;
+};

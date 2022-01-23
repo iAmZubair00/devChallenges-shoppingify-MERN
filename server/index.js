@@ -3,6 +3,8 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import itemsRoutes from "./routes/items.js";
+import listRoutes from "./routes/shoppingList.js";
+import listItemsRoutes from "./routes/listItems.js";
 
 const app = express();
 
@@ -12,6 +14,8 @@ app.use(cors());
 
 // Routes
 app.use("/items", itemsRoutes);
+app.use("/lists", listRoutes);
+app.use("/listItems", listItemsRoutes);
 
 const CONNECTION_URL =
   "mongodb://user1:dJYqHB0CAbXStVTd@codecamp-mongo-course-shard-00-00.spl74.mongodb.net:27017,codecamp-mongo-course-shard-00-01.spl74.mongodb.net:27017,codecamp-mongo-course-shard-00-02.spl74.mongodb.net:27017/db1?ssl=true&replicaSet=atlas-480jj6-shard-0&authSource=admin&retryWrites=true&w=majority";

@@ -11,6 +11,7 @@ import useStyles from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleShoppingList } from "../../features/rightBarToggleSlice";
 import { deleteItem } from "../../features/categoryItemSlice";
+import { addList, addListItem } from "../../features/shoppingListSlice";
 const ItemDetail = () => {
   //console.log(post);
   const item = useSelector((store) => store.itemDetail);
@@ -65,7 +66,11 @@ const ItemDetail = () => {
         </Button>
         <Button
           size="small"
-          onClick={() => dispatch(toggleShoppingList())}
+          onClick={() => {
+            //dispatch(addList({ title: "temp" }));
+            dispatch(addListItem({ item: item }));
+            dispatch(toggleShoppingList());
+          }}
           style={{
             backgroundColor: "#F9A109",
             padding: "0.8rem",

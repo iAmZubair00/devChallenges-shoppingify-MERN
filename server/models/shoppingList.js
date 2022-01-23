@@ -1,11 +1,10 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const shoppingListSchema = new mongoose.Schema({
   title: {
     type: String,
     default: "Shopping List",
   },
-  items: [{ type: mongoose.Schema.Types.ObjectId, ref: "selecteditem" }],
   isCompleted: {
     type: Boolean,
     default: false,

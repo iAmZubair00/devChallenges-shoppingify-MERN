@@ -1,26 +1,47 @@
 import React from "react";
-import { Container, Grid } from "@material-ui/core";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Grid } from "@material-ui/core";
 import Form from "./components/Form/Form";
 import Items from "./components/Items/Items";
+import ItemDetail from "./components/ItemDetail/ItemDetail";
+import { useSelector } from "react-redux";
+import Sidebar from "./components/Sidebar/Sidebar";
+import ShoppingList from "./components/ShoppingList/ShoppingList";
+import History from "./components/History/History";
 
 const App = () => {
+  const rightBarCurrent = useSelector((store) => store.rightBarToggle);
   return (
     <>
-      <Container maxWidth="lg">
-        <Grid
-          container
-          justifyContent="space-between"
-          alignItems="stretch"
-          spacing={3}
-        >
-          <Grid item xs={12} sm={7}>
-            <Items />
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <Form />
-          </Grid>
+      <Grid container>
+        <Grid item xs={1}>
+          <Sidebar />
         </Grid>
-      </Container>
+        <Grid
+          item
+          xs
+          style={{ backgroundColor: "#FAFAFE", padding: "1.5rem 3rem" }}
+        >
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Items />} />
+              <Route path="/history" element={<History />} />
+            </Routes>
+          </BrowserRouter>
+        </Grid>
+        {/* {!(
+              Object.keys(item).length === 0 && item.constructor === Object
+            )} */}
+        <Grid item xs={3}>
+          {rightBarCurrent === "itemDetail" ? (
+            <ItemDetail />
+          ) : rightBarCurrent === "itemAdd" ? (
+            <Form />
+          ) : (
+            <ShoppingList />
+          )}
+        </Grid>
+      </Grid>
     </>
   );
 };

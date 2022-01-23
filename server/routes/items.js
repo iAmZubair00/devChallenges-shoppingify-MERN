@@ -2,17 +2,21 @@ import express from "express";
 
 const router = express.Router();
 import {
-  addItem_With_Category,
+  categories_get,
   category_add,
-  category_find,
+  items_get,
   item_add,
-  item_find,
 } from "../controllers/items.js";
 
 router.post("/category/add", category_add);
-router.get("/category/find", category_find);
-router.put("/category/edit", addItem_With_Category);
+router.get("/categories/get", categories_get);
 router.post("/add", item_add);
-router.get("/find/:id", item_find);
+router.get("/get", items_get);
 
 export default router;
+
+// ---> alternate logic - used previously
+
+// router.get("/category/find", category_find);
+// router.put("/category/edit", addItem_With_Category);
+// router.get("/find/:id", item_find);

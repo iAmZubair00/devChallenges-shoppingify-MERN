@@ -1,22 +1,13 @@
 import * as api from "../api/index";
+import { selectSearchTerm } from "./searchTermSlice";
 
-export const addItem_With_Category = (item) => async (dispatch) => {
-  try {
-    const { data } = await api.addItem_With_Category(item);
-    dispatch({
-      type: "categoryItem/add_item",
-      payload: data,
-    });
-  } catch (err) {
-    console.log(err.message);
-  }
-};
+// Action Creators
 
 export const addCategory = (categ) => async (dispatch) => {
   try {
     const { data } = await api.addCategory(categ);
     dispatch({
-      type: "categoryItem/add_category",
+      type: "category/add",
       payload: data,
     });
   } catch (err) {
@@ -28,7 +19,7 @@ export const getCategories = () => async (dispatch) => {
   try {
     const { data } = await api.getCategories();
     dispatch({
-      type: "categoryItem/getAll",
+      type: "category/get",
       payload: data,
     });
   } catch (err) {
@@ -36,35 +27,110 @@ export const getCategories = () => async (dispatch) => {
   }
 };
 
+export const addItem = (item) => async (dispatch) => {
+  try {
+    const { data } = await api.addItem(item);
+    dispatch({
+      type: "item/add",
+      payload: data,
+    });
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+export const getItems = () => async (dispatch) => {
+  try {
+    const { data } = await api.getItems();
+    dispatch({
+      type: "item/get",
+      payload: data,
+    });
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+// Reducers
+
 const initialState = [];
-export const categoryItemReducer = (state = initialState, action) => {
+
+export const itemReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "categoryItem/add_item":
-      return state.find(
-        (item) => item.category_name === action.payload.category_name
-      )
-        ? state.map((item) =>
-            item.category_name === action.payload.category_name
-              ? [...item.items, action.payload]
-              : item
-          )
-        : [...state, action.payload];
-    case "categoryItem/add_category":
-      return action.payload;
-    case "categoryItem/getAll":
+    case "item/add":
+      return [...state, action.payload];
+    case "item/get":
       return action.payload;
     default:
       return state;
   }
 };
 
-// export const selectAllRecipes = (state) => state.allRecipes;
+export const categoryReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "category/add":
+      return [...state, action.payload];
+    case "category/get":
+      return action.payload;
+    default:
+      return state;
+  }
+};
 
-// export const selectFilteredAllRecipes = (state) => {
-//   const allRecipes = selectAllRecipes(state);
-//   const searchTerm = selectSearchTerm(state);
+// selectors for Items
 
-//   return allRecipes.filter((recipe) =>
-//     recipe.name.toLowerCase().includes(searchTerm.toLowerCase())
-//   );
+export const selectAllItems = (state) => state.items;
+
+export const selectFilteredAllItems = (state) => {
+  const allItems = selectAllItems(state);
+  const searchTerm = selectSearchTerm(state);
+
+  return allItems.filter((item) =>
+    item.item_name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+};
+
+// ----> alternate logic - used previously
+
+// export const addItem_With_Category = (item) => async (dispatch) => {
+//   try {
+//     const { data } = await api.addItem_With_Category(item);
+//     dispatch({
+//       type: "categoryItem/add_item",
+//       payload: data,
+//     });
+//   } catch (err) {
+//     console.log(err.message);
+//   }
+// };
+
+// export const getItemsWithCategories = () => async (dispatch) => {
+//   try {
+//     const { data } = await api.getItemsWithCategories();
+//     dispatch({
+//       type: "categoryItem/getAll",
+//       payload: data,
+//     });
+//   } catch (err) {
+//     console.log(err.message);
+//   }
+// };
+
+// export const categoryItemReducer = (state = initialState, action) => {
+//   switch (action.type) {
+//     case "categoryItem/add_item":
+//       return state.find(
+//         (item) => item.category_name === action.payload.category_name
+//       )
+//         ? state.map((item) =>
+//             item.category_name === action.payload.category_name
+//               ? action.payload
+//               : item
+//           )
+//         : [...state, action.payload];
+//     case "categoryItem/getAll":
+//       return action.payload;
+//     default:
+//       return state;
+//   }
 // };

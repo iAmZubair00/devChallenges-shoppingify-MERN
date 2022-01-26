@@ -4,9 +4,9 @@ import {
   CardActions,
   CardContent,
   CardMedia,
-  Button,
   Typography,
 } from "@material-ui/core";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import useStyles from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleShoppingList } from "../../features/rightBarToggleSlice";
@@ -17,11 +17,13 @@ import {
   selectAcitveList_Id,
 } from "../../features/shoppingListSlice";
 import { itemAlreadyInList } from "../../utils";
+import { Button } from "@mui/material";
 const ItemDetail = () => {
   //console.log(post);
   const item = useSelector((store) => store.itemDetail);
   const listItems = useSelector((store) => store.listItems);
   const activeListId = useSelector(selectAcitveList_Id);
+  const itemInList = itemAlreadyInList(item._id, listItems);
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -30,6 +32,17 @@ const ItemDetail = () => {
       className={classes.card}
       style={{ padding: "2rem 2rem", height: "90vh", boxShadow: "none" }}
     >
+      <CardActions>
+        <Button
+          variant="text"
+          size="small"
+          startIcon={<ArrowBackIcon />}
+          sx={{ color: "#F9A109" }}
+          onClick={() => dispatch(toggleShoppingList())}
+        >
+          back
+        </Button>
+      </CardActions>
       <CardMedia
         className={classes.media}
         image={item.image}
@@ -78,14 +91,12 @@ const ItemDetail = () => {
             dispatch(addListItem({ item: item, shoppingListId: activeListId }));
             dispatch(toggleShoppingList());
           }}
-          disabled={() => {
-            console.log(itemAlreadyInList(item._id, listItems));
-            return false;
-          }}
+          disabled={itemInList}
           style={{
             backgroundColor: "#F9A109",
             padding: "0.8rem",
             borderRadius: "10px",
+            color: "white",
           }}
         >
           Add to list

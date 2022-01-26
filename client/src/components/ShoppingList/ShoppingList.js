@@ -4,9 +4,13 @@ import {
   Card,
   CardContent,
   CardMedia,
+  IconButton,
   Stack,
   Typography,
 } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import DeleteIcon from "@mui/icons-material/Delete";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAllItems } from "../../features/categoryItemSlice";
@@ -99,10 +103,31 @@ const Category = ({ category }) => {
 };
 
 const Item = ({ listItem }) => {
-  const { item } = listItem;
+  const { item, quantity } = listItem;
   return (
-    <div>
+    <Stack direction="row" spacing={2} justifyContent="space-between">
       <Typography variant="h6">{item.item_name}</Typography>
-    </div>
+      <Stack direction="row">
+        <IconButton
+          aria-label="delete"
+          size="small"
+          style={{
+            backgroundColor: "#F9A109",
+            color: "white",
+            borderRadius: "8px",
+          }}
+        >
+          <DeleteIcon fontSize="inherit" />
+        </IconButton>
+        <Button
+          variant="text"
+          startIcon={<RemoveIcon />}
+          endIcon={<AddIcon />}
+          style={{ backgroundColor: "white" }}
+        >
+          {quantity} pcs
+        </Button>
+      </Stack>
+    </Stack>
   );
 };

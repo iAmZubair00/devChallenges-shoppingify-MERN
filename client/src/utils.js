@@ -29,12 +29,7 @@ export const mergeListItemsWithCategories = (listItems, categories) => {
 };
 
 export const itemAlreadyInList = (id, listItems) => {
-  listItems.forEach((listItem) => {
-    if (listItem.item._id === id) {
-      return true;
-    }
-  });
-  return false;
+  return listItems.some((listItem) => listItem.item._id === id);
 };
 
 // var categories = [

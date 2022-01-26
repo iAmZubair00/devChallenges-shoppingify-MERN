@@ -90,9 +90,10 @@ export const listReducer = (state = initialState, action) => {
   }
 };
 
-// selectors for Items
+// selectors for list
 
-// export const selectAllItems = (state) => state.items;
+export const selectAcitveList_Id = (state) =>
+  state.lists.find((list) => list.isActive)?._id;
 
 // export const selectFilteredAllItems = (state) => {
 //   const allItems = selectAllItems(state);

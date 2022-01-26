@@ -105,7 +105,10 @@ const Form = () => {
           variant="contained"
           color="secondary"
           size="small"
-          onClick={clear}
+          onClick={() => {
+            clear();
+            dispatch(toggleShoppingList());
+          }}
           fullWidth
         >
           Cancel

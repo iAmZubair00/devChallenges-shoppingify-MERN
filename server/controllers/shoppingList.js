@@ -23,6 +23,25 @@ export const list_add = async (req, res) => {
   }
 };
 
+export const toggle_active_list = async (req, res) => {
+  const { _id } = req.body;
+  try {
+    var lists = await shoppingListModel.findOneAndUpdate(
+      { _id: _id },
+      { isActive: true },
+      { new: true }
+    );
+    var lists = await shoppingListModel.updateMany(
+      { _id: { $ne: _id } },
+      { isActive: false },
+      { new: true }
+    );
+    res.status(200).json(lists);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
 // export const list_delete = async (req, res) => {
 //   let id = req.params.id;
 

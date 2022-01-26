@@ -1,13 +1,9 @@
 import { Box, TextField, Typography, InputAdornment } from "@material-ui/core";
 import SearchIcon from "@mui/icons-material/Search";
 import useStyles from "./styles";
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getCategories,
-  getItems,
-  selectFilteredAllItems,
-} from "../../features/categoryItemSlice";
+import { selectFilteredAllItems } from "../../features/categoryItemSlice";
 import {
   selectSearchTerm,
   setSearchTerm,
@@ -23,16 +19,10 @@ const Items = () => {
   const categories = useSelector((store) => store.categories);
   const allCategories = mergeItemsWithCategories(items, categories);
   console.log(allCategories);
-  const dispatch = useDispatch();
-  const styles = useStyles();
+  //const styles = useStyles();
   // useEffect(() => {
   //   dispatch(getItemsWithCategories());    <--- alternate logic - used previously
   // }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(getCategories());
-    dispatch(getItems());
-  }, [dispatch]);
 
   return (
     <>

@@ -11,10 +11,17 @@ import useStyles from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleShoppingList } from "../../features/rightBarToggleSlice";
 import { deleteItem } from "../../features/categoryItemSlice";
-import { addList, addListItem } from "../../features/shoppingListSlice";
+import {
+  addList,
+  addListItem,
+  selectAcitveList_Id,
+} from "../../features/shoppingListSlice";
+import { itemAlreadyInList } from "../../utils";
 const ItemDetail = () => {
   //console.log(post);
   const item = useSelector((store) => store.itemDetail);
+  const listItems = useSelector((store) => store.listItems);
+  const activeListId = useSelector(selectAcitveList_Id);
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -68,8 +75,12 @@ const ItemDetail = () => {
           size="small"
           onClick={() => {
             //dispatch(addList({ title: "temp" }));
-            dispatch(addListItem({ item: item }));
+            dispatch(addListItem({ item: item, shoppingListId: activeListId }));
             dispatch(toggleShoppingList());
+          }}
+          disabled={() => {
+            console.log(itemAlreadyInList(item._id, listItems));
+            return false;
           }}
           style={{
             backgroundColor: "#F9A109",

@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Grid } from "@material-ui/core";
 import Form from "./components/Form/Form";
 import Items from "./components/Items/Items";
 import ItemDetail from "./components/ItemDetail/ItemDetail";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Sidebar from "./components/Sidebar/Sidebar";
 import ShoppingList from "./components/ShoppingList/ShoppingList";
 import History from "./components/History/History";
+import { getCategories, getItems } from "./features/categoryItemSlice";
+import { getListItems, getLists } from "./features/shoppingListSlice";
 
 const App = () => {
   const rightBarCurrent = useSelector((store) => store.rightBarToggle);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getListItems());
+    dispatch(getLists());
+    dispatch(getCategories());
+    dispatch(getItems());
+  }, [dispatch]);
   return (
     <>
       <Grid container>

@@ -29,8 +29,8 @@ const Form = () => {
     e.preventDefault();
     //dispatch(addItem_With_Category(itemData));   <--- alternate logic - used previously
     dispatch(addItem(itemData));
-    !category_names.includes(itemData.category_name) &&
-      dispatch(addCategory({ category_name: itemData.category_name }));
+    /* !category_names.includes(itemData.category_name) &&
+      dispatch(addCategory({ category_name: itemData.category_name })); */
     dispatch(toggleShoppingList());
     clear();
   };

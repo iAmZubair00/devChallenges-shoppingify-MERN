@@ -36,7 +36,21 @@ export const items_get = async (req, res) => {
 export const item_add = async (req, res) => {
   const postBody = req.body;
   //console.log(postBody);
-  const newItem = new itemModel(postBody);
+  let category = await CategoryModel.findOne({ category_name: postBody.category_name });
+
+  if (!category) {
+    // Create a new category if it doesn't exist
+    category = new CategoryModel({ category_name: postBody.category_name });
+    await category.save();
+  }
+
+  // Create the new item with the category's _id
+  const newItem = new itemModel({
+    ...postBody,
+    category: category._id
+  });
+
+  //const newItem = new itemModel(postBody);
 
   try {
     await newItem.save();

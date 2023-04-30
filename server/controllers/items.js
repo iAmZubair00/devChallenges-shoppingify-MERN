@@ -26,7 +26,7 @@ export const categories_get = async (req, res) => {
 
 export const items_get = async (req, res) => {
   try {
-    const items = await itemModel.find();
+    const items = await itemModel.find().populate('category', 'category_name').exec();
     res.status(200).json(items);
   } catch (err) {
     res.status(404).json({ message: err.message });

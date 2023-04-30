@@ -1,12 +1,10 @@
-export const mergeItemsWithCategories = (items, categories) =>
-  categories.map((category) => {
-    return {
-      ...category,
-      items: items.filter(
-        (item) => item.category_name === category.category_name
-      ),
-    };
-  });
+export const restructureItemsForCategories = (items) =>{
+  let categoryIds = removeArrayDuplicates(items.map(item=> item.category._id));
+  return categoryIds.map(id => {
+    let thisCategoryItems = items.filter(item=> item.category._id===id);
+    return {items: thisCategoryItems}
+  })
+}
 
 export const mergeItemsInLists = (items, lists) =>
   lists.map((list) => {
@@ -31,6 +29,12 @@ export const mergeListItemsWithCategories = (listItems, categories) => {
 export const itemAlreadyInList = (id, listItems) => {
   return listItems.some((listItem) => listItem.item._id === id);
 };
+
+export const removeArrayDuplicates = (array) => {
+  return array.filter((value, index, self) => {
+    return self.indexOf(value) === index;
+  });
+}
 
 // var categories = [
 //   { category_name: "fruit" },

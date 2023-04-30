@@ -8,7 +8,7 @@ import {
   selectSearchTerm,
   setSearchTerm,
 } from "../../features/searchTermSlice";
-import { mergeItemsWithCategories } from "../../utils";
+import { restructureItemsForCategories } from "../../utils";
 import CategoryItem from "./CategoryItem/CategoryItem";
 import { Stack } from "@mui/material";
 
@@ -16,9 +16,8 @@ const Items = () => {
   //const allCategories = useSelector((store) => store.itemsWithCategory);   <--- alternate logic - used previously
   //const items = useSelector((store) => store.items);
   const items = useSelector(selectFilteredAllItems);
-  const categories = useSelector((store) => store.categories);
-  const allCategories = mergeItemsWithCategories(items, categories);
-  console.log(allCategories);
+ const restructuredItems = restructureItemsForCategories(items);
+  console.log(restructuredItems);
   //const styles = useStyles();
   // useEffect(() => {
   //   dispatch(getItemsWithCategories());    <--- alternate logic - used previously
@@ -33,8 +32,8 @@ const Items = () => {
         <SearchBox />
       </Box>
       <Stack spacing={2}>
-        {allCategories.map((category) => (
-          <CategoryItem key={category._id} category={category} />
+        {restructuredItems.map((item) => (
+          <CategoryItem key={item.category?._id} category={item} />
         ))}
       </Stack>
     </>

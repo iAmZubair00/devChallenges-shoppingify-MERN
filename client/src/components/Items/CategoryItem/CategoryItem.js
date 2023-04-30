@@ -5,7 +5,8 @@ import useStyles from "./styles";
 
 const CategoryItem = ({ category }) => {
   const classes = useStyles();
-  const { category_name, items } = category;
+  const { items } = category;
+  const category_name = items[0].category.category_name;
   return (
     <Stack className={classes.mainContainer}>
       <Typography variant="h4">{category_name}</Typography>

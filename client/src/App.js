@@ -10,6 +10,7 @@ import ShoppingList from "./components/ShoppingList/ShoppingList";
 import History from "./components/History/History";
 import { getCategories, getItems } from "./features/categoryItemSlice";
 import { getListItems, getLists } from "./features/shoppingListSlice";
+import { getLookups } from "./features/lookupSlice";
 
 const App = () => {
   const rightBarCurrent = useSelector((store) => store.rightBarToggle);
@@ -19,6 +20,7 @@ const App = () => {
     dispatch(getLists());
     dispatch(getCategories());
     dispatch(getItems());
+    dispatch(getLookups());
   }, [dispatch]);
   return (
     <>

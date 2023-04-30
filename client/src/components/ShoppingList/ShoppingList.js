@@ -32,7 +32,7 @@ const ShoppingList = () => {
   // const allCategories = mergeItemsWithCategories(items, categories);
   const categories = useSelector((store) => store.categories);
   const activeListId = useSelector(selectAcitveList_Id);
-  const lists = useSelector((store) => store.lists);
+  const lists = useSelector((store) => store.shoppingLists);
   const listItems = useSelector((store) => store.listItems);
   const allLists = mergeItemsInLists(listItems, lists);
   const activeList = allLists.find((list) => list._id === activeListId);

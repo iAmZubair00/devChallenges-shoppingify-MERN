@@ -1,11 +1,11 @@
 import * as api from "../api/index";
-import { ShoppingListStatus } from "../utils/constants";
+import { LookupTypes, ShoppingListStatus } from "../utils/constants";
 
 // Action Creators
 
-export const addList = (list) => async (dispatch) => {
+export const createShoppingList = (list) => async (dispatch) => {
   try {
-    const { data } = await api.addList(list);
+    const { data } = await api.ShoppingListCreate(list);
     dispatch({
       type: "list/add",
       payload: data,
@@ -93,8 +93,16 @@ export const listReducer = (state = initialState, action) => {
 
 // selectors for list
 
-export const selectAcitveList_Id = (state) =>
-  state.lists.find((list) => list.status===ShoppingListStatus.ACTIVE)?._id;
+export const selectAcitveList_Id = (state) => {
+  let activeStatusLookup = state.lookups.filter(
+    (x) =>
+      x.type === LookupTypes.ShoppingListStatus &&
+      x.hiddenValue === ShoppingListStatus.ACTIVE
+  )[0];
+  return state.shoppingLists.find(
+    (list) => list.statusLkpId === activeStatusLookup?._id
+  )?._id;
+};
 
 // export const selectFilteredAllItems = (state) => {
 //   const allItems = selectAllItems(state);

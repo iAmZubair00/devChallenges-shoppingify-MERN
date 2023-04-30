@@ -5,6 +5,7 @@ import { ItemDetailReducer } from "../features/ItemDetail";
 import { rightBarToggleReducer } from "../features/rightBarToggleSlice";
 import { searchTermReducer } from "../features/searchTermSlice";
 import { listItemReducer, listReducer } from "../features/shoppingListSlice";
+import { lookupReducer } from "../features/lookupSlice";
 
 const allReducers = combineReducers({
   //itemsWithCategory: categoryItemReducer,         <--- alternate logic - used previously
@@ -12,7 +13,8 @@ const allReducers = combineReducers({
   items: itemReducer,
   categories: categoryReducer,
   listItems: listItemReducer,
-  lists: listReducer,
+  shoppingLists: listReducer,
+  lookups: lookupReducer,
   searchTerm: searchTermReducer,
   rightBarToggle: rightBarToggleReducer,
 });

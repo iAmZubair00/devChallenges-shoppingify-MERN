@@ -1,18 +1,18 @@
 import mongoose from "mongoose";
 
 const LookupSchema = new mongoose.Schema({
-  hiddenValue:  {
+  hiddenValue: {
     type: String,
-    required: true
+    required: true,
   },
-  visibleValue:  {
+  visibleValue: {
     type: String,
-    required: true
+    required: true,
   },
   type: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 
-export const itemModel = mongoose.model("Lookup", LookupSchema);
+export const LookupModel = mongoose.model("Lookup", LookupSchema);

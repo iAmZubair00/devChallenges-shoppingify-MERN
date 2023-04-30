@@ -1,13 +1,13 @@
 import express from "express";
 import {
   lists_get,
-  list_add,
+  Create,
   toggle_active_list,
 } from "../controllers/shoppingList.js";
 
 const router = express.Router();
 
-router.post("/add", list_add);
+router.post("", Create);
 router.get("/get", lists_get);
 router.put("/toggleActive", toggle_active_list);
 // router.post("/add", item_add);

@@ -39,8 +39,8 @@ export const getItems = async () => {
 //   return data;
 // };
 
-export const addList = async (list) => {
-  const data = await axios.post(`${baseURL}/lists/add`, list);
+export const ShoppingListCreate = async (list) => {
+  const data = await axios.post(`${baseURL}/lists`, list);
   return data;
 };
 
@@ -61,5 +61,15 @@ export const addListItem = async (item) => {
 
 export const getListItems = async () => {
   const data = await axios.get(`${baseURL}/listItems/get`);
+  return data;
+};
+
+export const LookupCreate = async (data) => {
+  const response = await axios.post(`${baseURL}/lookup`, data);
+  return response;
+};
+
+export const LookupsGet = async () => {
+  const data = await axios.get(`${baseURL}/lookup`);
   return data;
 };

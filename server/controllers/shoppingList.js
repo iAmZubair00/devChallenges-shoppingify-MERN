@@ -10,7 +10,7 @@ export const lists_get = async (req, res) => {
   }
 };
 
-export const list_add = async (req, res) => {
+export const Create = async (req, res) => {
   const listBody = req.body;
   //console.log(postBody);
   const newList = new shoppingListModel(listBody);

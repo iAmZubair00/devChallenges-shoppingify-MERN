@@ -1,6 +1,5 @@
 import { Box, TextField, Typography, InputAdornment } from "@material-ui/core";
 import SearchIcon from "@mui/icons-material/Search";
-import useStyles from "./styles";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectFilteredAllItems } from "../../features/categoryItemSlice";
@@ -16,7 +15,7 @@ const Items = () => {
   //const allCategories = useSelector((store) => store.itemsWithCategory);   <--- alternate logic - used previously
   //const items = useSelector((store) => store.items);
   const items = useSelector(selectFilteredAllItems);
- const restructuredItems = restructureItemsForCategories(items);
+  const restructuredItems = restructureItemsForCategories(items);
   console.log(restructuredItems);
   //const styles = useStyles();
   // useEffect(() => {

@@ -13,6 +13,15 @@ import useStyles from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { addCategory, addItem } from "../../features/categoryItemSlice";
 import { toggleShoppingList } from "../../features/rightBarToggleSlice";
+import {
+  createShoppingList,
+  selectAcitveList_Id,
+} from "../../features/shoppingListSlice";
+import {
+  selectLookupsByType,
+  selectLookupsByTypeAndHiddenValue,
+} from "../../features/lookupSlice";
+import { LookupTypes, ShoppingListStatus } from "../../utils/constants";
 
 const Form = () => {
   const [itemData, setItemData] = useState({
@@ -22,13 +31,29 @@ const Form = () => {
     category_name: "",
   });
   const categories = useSelector((store) => store.categories);
+  const statusLookups = useSelector((store) =>
+    selectLookupsByTypeAndHiddenValue(
+      store,
+      LookupTypes.ShoppingListStatus,
+      ShoppingListStatus.ACTIVE
+    )
+  );
+  const activeListId = useSelector(selectAcitveList_Id);
   const category_names = categories.map((category) => category.category_name);
   const classes = useStyles();
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-    //dispatch(addItem_With_Category(itemData));   <--- alternate logic - used previously
-    dispatch(addItem(itemData));
+    //dispatch(addItem(itemData));
+    if (!!activeListId) {
+      // TODO: use this shoppingListId to create new ShoppingItem
+    } else {
+      let shoppingListBody = {
+        statusLkpId: statusLookups[0]._id,
+      };
+      dispatch(createShoppingList(shoppingListBody));
+      // TODO: use this shoppingList->Id to create new ShoppingItem
+    }
     /* !category_names.includes(itemData.category_name) &&
       dispatch(addCategory({ category_name: itemData.category_name })); */
     dispatch(toggleShoppingList());

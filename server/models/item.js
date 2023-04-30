@@ -7,23 +7,14 @@ const ItemSchema = new mongoose.Schema({
     required: true,
   },
   image: String,
-  category_name: {
-    type: String,
-    required: true,
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category'
   },
   note: String,
 });
 
-const CategorySchema = new mongoose.Schema({
-  category_name: {
-    type: String,
-    unique: true,
-    required: true,
-  },
-});
-
-export const itemModel = mongoose.model("item", ItemSchema);
-export const CategoryModel = mongoose.model("category", CategorySchema);
+export const itemModel = mongoose.model("Item", ItemSchema);
 
 // alternate logic - used previously
 

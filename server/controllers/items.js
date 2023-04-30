@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-import { CategoryModel, itemModel } from "../models/items.js";
+import { itemModel } from "../models/item.js";
+import { CategoryModel } from "../models/category.js";
 
 export const category_add = async (req, res) => {
   const postBody = req.body;

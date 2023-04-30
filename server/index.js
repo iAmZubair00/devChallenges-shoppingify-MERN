@@ -18,7 +18,7 @@ app.use("/lists", listRoutes);
 app.use("/listItems", listItemsRoutes);
 
 const CONNECTION_URL =
-  "mongodb://user1:dJYqHB0CAbXStVTd@codecamp-mongo-course-shard-00-00.spl74.mongodb.net:27017,codecamp-mongo-course-shard-00-01.spl74.mongodb.net:27017,codecamp-mongo-course-shard-00-02.spl74.mongodb.net:27017/db1?ssl=true&replicaSet=atlas-480jj6-shard-0&authSource=admin&retryWrites=true&w=majority";
+  "mongodb://user1:RbUFu6VgUh6Y271f@codecamp-mongo-course-shard-00-00.spl74.mongodb.net:27017,codecamp-mongo-course-shard-00-01.spl74.mongodb.net:27017,codecamp-mongo-course-shard-00-02.spl74.mongodb.net:27017/shoppingify-devChallenges?ssl=true&replicaSet=atlas-480jj6-shard-0&authSource=admin&retryWrites=true&w=majority";
 const PORT = process.env.PORT || 5000;
 
 mongoose

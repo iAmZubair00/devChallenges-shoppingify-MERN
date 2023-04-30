@@ -5,7 +5,12 @@ const shoppingListSchema = new mongoose.Schema({
     type: String,
     default: "Shopping List",
   },
-  isCompleted: {
+  statusLkpId: String,
+  shoppingItems: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'ShoppingItem'
+  }],
+  /* isCompleted: {
     type: Boolean,
     default: false,
   },
@@ -16,14 +21,14 @@ const shoppingListSchema = new mongoose.Schema({
   isActive: {
     type: Boolean,
     default: true,
-  },
-  date: {
+  }, */
+  createdDate: {
     type: Date,
     default: new Date(),
-  },
+  }
 });
 
 export const shoppingListModel = mongoose.model(
-  "shoppinglist",
+  "ShoppingList",
   shoppingListSchema
 );

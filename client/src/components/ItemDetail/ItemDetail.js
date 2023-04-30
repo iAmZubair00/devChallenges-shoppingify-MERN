@@ -16,8 +16,8 @@ import {
   addListItem,
   selectAcitveList_Id,
 } from "../../features/shoppingListSlice";
-import { itemAlreadyInList } from "../../utils";
 import { Button } from "@mui/material";
+import { itemAlreadyInList } from "../../utils/common";
 const ItemDetail = () => {
   //console.log(post);
   const item = useSelector((store) => store.itemDetail);

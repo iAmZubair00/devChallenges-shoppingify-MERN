@@ -5,7 +5,9 @@ import {
   CardContent,
   CardMedia,
   IconButton,
+  InputAdornment,
   Stack,
+  TextField,
   Typography,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
@@ -15,13 +17,14 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAllItems } from "../../features/categoryItemSlice";
 import { toggleItemAdd } from "../../features/rightBarToggleSlice";
+
+import bottleSvg from "../../assets/images/bottle.svg";
+import basketSvg from "../../assets/images/basket.svg";
+import { selectAcitveList_Id } from "../../features/shoppingListSlice";
 import {
   mergeItemsInLists,
-  mergeItemsWithCategories,
   mergeListItemsWithCategories,
-} from "../../utils";
-import bottleSvg from "../../assets/images/bottle.svg";
-import { selectAcitveList_Id } from "../../features/shoppingListSlice";
+} from "../../utils/common";
 
 const ShoppingList = () => {
   // const items = useSelector(selectAllItems);
@@ -42,8 +45,10 @@ const ShoppingList = () => {
   console.log(activeListItems);
 
   return (
-    listItems.length && (
-      <div style={{ backgroundColor: "#FFF0DE", padding: "2rem" }}>
+    <>
+      <div
+        style={{ backgroundColor: "#FFF0DE", height: "87%", padding: "2rem" }}
+      >
         <Card
           sx={{
             display: "flex",
@@ -75,14 +80,46 @@ const ShoppingList = () => {
           </Box>
         </Card>
 
-        <Typography variant="h5">ShoppingList</Typography>
-        <Stack spacing={2}>
-          {activeListItems.map((category) => (
-            <Category key={category._id} category={category} />
-          ))}
-        </Stack>
+        {listItems?.length ? (
+          <>
+            <Typography variant="h5">ShoppingList</Typography>
+            <Stack spacing={2}>
+              {activeListItems.map((category) => (
+                <Category key={category._id} category={category} />
+              ))}
+            </Stack>
+          </>
+        ) : (
+          <div style={{ textAlign: "center" }}>
+            <p style={{ margin: "2rem 0" }}>No Items</p>
+            <img src={basketSvg} alt="memoriesImage" width="90%" />
+          </div>
+        )}
       </div>
-    )
+      <TextField
+        id="CompanyBranchId"
+        //name={UserFieldNames.CompanyBranchId}
+        fullWidth
+        style={{ padding: 0 }}
+        label="Enter a name"
+        disabled={!listItems?.length}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <Button
+                color="primary"
+                variant="contained"
+                disabled={!listItems?.length}
+              >
+                Save
+              </Button>
+            </InputAdornment>
+          ),
+        }}
+        variant="outlined"
+        size="small"
+      ></TextField>
+    </>
   );
 };
 
@@ -90,7 +127,7 @@ export default ShoppingList;
 
 const Category = ({ category }) => {
   const { category_name, items } = category;
-  return items.length ? (
+  return items?.length ? (
     <Stack>
       <Typography>{category_name}</Typography>
       <Stack>

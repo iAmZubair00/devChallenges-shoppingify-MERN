@@ -26,7 +26,10 @@ export const categories_get = async (req, res) => {
 
 export const items_get = async (req, res) => {
   try {
-    const items = await itemModel.find().populate('category', 'category_name').exec();
+    const items = await itemModel
+      .find()
+      .populate("category", "category_name")
+      .exec();
     res.status(200).json(items);
   } catch (err) {
     res.status(404).json({ message: err.message });
@@ -36,7 +39,9 @@ export const items_get = async (req, res) => {
 export const item_add = async (req, res) => {
   const postBody = req.body;
   //console.log(postBody);
-  let category = await CategoryModel.findOne({ category_name: postBody.category_name });
+  let category = await CategoryModel.findOne({
+    category_name: postBody.category_name,
+  });
 
   if (!category) {
     // Create a new category if it doesn't exist
@@ -47,13 +52,15 @@ export const item_add = async (req, res) => {
   // Create the new item with the category's _id
   const newItem = new itemModel({
     ...postBody,
-    category: category._id
+    category: category._id,
   });
 
   //const newItem = new itemModel(postBody);
 
   try {
     await newItem.save();
+    // Populate the item's category data before returning it
+    await newItem.populate({ path: "category", model: "Category" });
     res.status(200).json(newItem);
   } catch (err) {
     res.status(400).json({ message: err.message });

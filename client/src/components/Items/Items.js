@@ -8,7 +8,7 @@ import {
   selectSearchTerm,
   setSearchTerm,
 } from "../../features/searchTermSlice";
-import { restructureItemsForCategories } from "../../utils";
+import { restructureItemsForCategories } from "../../utils/common";
 import CategoryItem from "./CategoryItem/CategoryItem";
 import { Stack } from "@mui/material";
 

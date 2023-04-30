@@ -1,4 +1,5 @@
 import * as api from "../api/index";
+import { ShoppingListStatus } from "../utils/constants";
 
 // Action Creators
 
@@ -93,7 +94,7 @@ export const listReducer = (state = initialState, action) => {
 // selectors for list
 
 export const selectAcitveList_Id = (state) =>
-  state.lists.find((list) => list.isActive)?._id;
+  state.lists.find((list) => list.status===ShoppingListStatus.ACTIVE)?._id;
 
 // export const selectFilteredAllItems = (state) => {
 //   const allItems = selectAllItems(state);

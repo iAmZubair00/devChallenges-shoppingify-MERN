@@ -2,10 +2,11 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 import itemsRoutes from "./routes/items.js";
 import listRoutes from "./routes/shoppingList.js";
 import listItemsRoutes from "./routes/listItems.js";
-
+dotenv.config();
 const app = express();
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
@@ -17,8 +18,7 @@ app.use("/items", itemsRoutes);
 app.use("/lists", listRoutes);
 app.use("/listItems", listItemsRoutes);
 
-const CONNECTION_URL =
-  "mongodb://user1:RbUFu6VgUh6Y271f@codecamp-mongo-course-shard-00-00.spl74.mongodb.net:27017,codecamp-mongo-course-shard-00-01.spl74.mongodb.net:27017,codecamp-mongo-course-shard-00-02.spl74.mongodb.net:27017/db1?ssl=true&replicaSet=atlas-480jj6-shard-0&authSource=admin&retryWrites=true&w=majority";
+const CONNECTION_URL = process.env.CONNECTION_URL;
 const PORT = process.env.PORT || 5000;
 
 mongoose
